@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $api = app()->make(\App\Lib\AlphaVantage\Database::class);
+    return ($api->updateMonthly('SQ'));
 });

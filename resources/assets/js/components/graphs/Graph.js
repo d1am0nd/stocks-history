@@ -42,8 +42,6 @@ class Graph extends React.Component {
     this.state = {
       height: window.innerHeight,
       width: window.innerWidth,
-      symbol: 'MSFT',
-      company: 'Microsoft',
     };
   }
 
@@ -67,10 +65,10 @@ class Graph extends React.Component {
   }
 
   handleLineClick(comp) {
-    const date = new Date(comp.activePayload[0].payload.month);
-    const searchTerm = `
-      ${fullMonth(date.getMonth())} ${date.getFullYear()} ${this.state.company}
-    `;
+    const date = new Date(comp.activePayload[0].payload.date);
+    const searchTerm = `${fullMonth(date.getMonth())} ` +
+      `${date.getFullYear()} ` +
+      `${this.props.stock.name} `;
 
     window.open(`https://www.google.com/search?q=${searchTerm}`, '_blank');
   }
@@ -85,7 +83,7 @@ class Graph extends React.Component {
       return Math.max(r, i.volume);
     }, 0));
     return this.props.data.map(i => {
-      const date = new Date(i.month);
+      const date = new Date(i.date);
       const shortY = date.getFullYear().toString().charAt(2) +
         date.getFullYear().toString().charAt(3);
       const pretty = `${date.getMonth()}-'${shortY}`;

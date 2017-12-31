@@ -40848,15 +40848,20 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
 
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 
-    _this.state = { stocks: [], data: [], selected: {} };
+    _this.state = {
+      stocks: [],
+      data: [],
+      selectedStock: {},
+      selectedType: 'months'
+    };
 
-    Object(__WEBPACK_IMPORTED_MODULE_2__api_stock__["b" /* fetchStocks */])().then(function (res) {
+    Object(__WEBPACK_IMPORTED_MODULE_2__api_stock__["c" /* fetchStocks */])().then(function (res) {
       var newState = {
         stocks: res.data,
-        selected: typeof res.data[0] !== 'undefined' ? res.data[1] : {}
+        selectedStock: typeof res.data[0] !== 'undefined' ? res.data[0] : {}
       };
       _this.setState(newState);
-      _this.fetchStockMonths(newState.selected.symbol);
+      _this.fetchStock(newState.selectedStock.symbol, _this.state.selectedType);
     }).catch(function (err) {
       console.log(err);
     });
@@ -40864,14 +40869,31 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
   }
 
   _createClass(Main, [{
-    key: 'fetchStockMonths',
-    value: function fetchStockMonths(symbol) {
+    key: 'fetchStock',
+    value: function fetchStock(symbol, type) {
       var _this2 = this;
 
       return new Promise(function (resolve, reject) {
-        Object(__WEBPACK_IMPORTED_MODULE_2__api_stock__["a" /* fetchMonths */])(symbol).then(function (res) {
+        var key = null;
+        var func = null;
+        switch (type) {
+          case 'months':
+            {
+              func = __WEBPACK_IMPORTED_MODULE_2__api_stock__["b" /* fetchMonths */];
+              key = 'months';
+              break;
+            }
+          case 'days':
+            {
+              func = __WEBPACK_IMPORTED_MODULE_2__api_stock__["a" /* fetchDays */];
+              key = 'days';
+              break;
+            }
+        }
+        console.log('fetching', type);
+        func(symbol).then(function (res) {
           _this2.setState({
-            data: res.data.months
+            data: res.data[key]
           });
           resolve(res);
         }).catch(function (err) {
@@ -40881,16 +40903,24 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
       });
     }
   }, {
+    key: 'handleTypeChange',
+    value: function handleTypeChange(e) {
+      var newType = e.target.value;
+      this.setState({
+        selectedType: newType
+      });
+      this.fetchStock(this.state.selectedStock.symbol, newType);
+    }
+  }, {
     key: 'handleStockChange',
     value: function handleStockChange(e) {
       var newSymbol = e.target.value;
       this.setState({
-        selected: this.state.stocks.find(function (s) {
+        selectedStock: this.state.stocks.find(function (s) {
           return s.symbol === newSymbol;
         })
       });
-      console.log(this.state.selected);
-      this.fetchStockMonths(newSymbol);
+      this.fetchStock(newSymbol, this.state.selectedType);
     }
   }, {
     key: 'render',
@@ -40900,14 +40930,14 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { style: Object(__WEBPACK_IMPORTED_MODULE_4__styles_layout__["a" /* wrapper */])() },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_graphs_Graph__["a" /* default */], { data: this.state.data }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_graphs_Graph__["a" /* default */], { stock: this.state.selectedStock, data: this.state.data }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'select',
           {
             onChange: function onChange(e) {
               return _this3.handleStockChange(e);
             },
-            value: this.state.selected.symbol },
+            value: this.state.selectedStock.symbol },
           this.state.stocks.map(function (s, i) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
@@ -40920,6 +40950,28 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
               ')'
             );
           })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'select',
+          {
+            onChange: function onChange(e) {
+              return _this3.handleTypeChange(e);
+            },
+            value: this.state.selectedType },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'option',
+            {
+              key: 'stock-type-1',
+              value: 'months' },
+            'By month'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'option',
+            {
+              key: 'stock-type-2',
+              value: 'days' },
+            'By day'
+          )
         )
       );
     }
@@ -44576,8 +44628,9 @@ module.exports = exports['default'];
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fetchStocks; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchMonths; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fetchStocks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fetchMonths; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchDays; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__params__ = __webpack_require__(330);
@@ -44589,6 +44642,9 @@ var fetchStocks = function fetchStocks() {
 };
 var fetchMonths = function fetchMonths(stock) {
   return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_1__params__["a" /* BASE_URL */] + '/' + stock + '/months');
+};
+var fetchDays = function fetchDays(stock) {
+  return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_1__params__["a" /* BASE_URL */] + '/' + stock + '/days');
 };
 
 /***/ }),
@@ -45546,9 +45602,7 @@ var Graph = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_clas
 
     _this.state = {
       height: window.innerHeight,
-      width: window.innerWidth,
-      symbol: 'MSFT',
-      company: 'Microsoft'
+      width: window.innerWidth
     };
     return _this;
   }
@@ -45579,8 +45633,8 @@ var Graph = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_clas
   }, {
     key: 'handleLineClick',
     value: function handleLineClick(comp) {
-      var date = new Date(comp.activePayload[0].payload.month);
-      var searchTerm = '\n      ' + Object(__WEBPACK_IMPORTED_MODULE_8__date_months__["a" /* full */])(date.getMonth()) + ' ' + date.getFullYear() + ' ' + this.state.company + '\n    ';
+      var date = new Date(comp.activePayload[0].payload.date);
+      var searchTerm = Object(__WEBPACK_IMPORTED_MODULE_8__date_months__["a" /* full */])(date.getMonth()) + ' ' + (date.getFullYear() + ' ') + (this.props.stock.name + ' ');
 
       window.open('https://www.google.com/search?q=' + searchTerm, '_blank');
     }
@@ -45596,7 +45650,7 @@ var Graph = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_clas
         return Math.max(r, i.volume);
       }, 0);
       return this.props.data.map(function (i) {
-        var date = new Date(i.month);
+        var date = new Date(i.date);
         var shortY = date.getFullYear().toString().charAt(2) + date.getFullYear().toString().charAt(3);
         var pretty = date.getMonth() + '-\'' + shortY;
         return _extends({}, i, {
@@ -45707,10 +45761,10 @@ var Tooltip = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_cl
   _createClass(Tooltip, [{
     key: 'prettyDate',
     value: function prettyDate() {
-      if (!this.props.data.month) {
+      if (!this.props.data.date) {
         return '';
       }
-      return this.props.data.month.substring(0, 10);
+      return this.props.data.date.substring(0, 10);
     }
   }, {
     key: 'render',

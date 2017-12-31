@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class StockMonth extends Model
 {
     protected $casts = [
-        'month' => 'date',
+        'date' => 'date',
         'open' => 'float',
         'high' => 'float',
         'low' => 'float',
@@ -19,7 +19,7 @@ class StockMonth extends Model
     ];
 
     protected $fillable = [
-        'month',
+        'date',
         'open',
         'high',
         'low',
@@ -39,11 +39,11 @@ class StockMonth extends Model
     }
 
     public function scopeByMonth($q, $y, $m) {
-        return $q->whereMonth('month', $m)->whereYear('month', $y);
+        return $q->whereMonth('date', $m)->whereYear('date', $y);
     }
 
     public function scopeOrder($q)
     {
-        return $q->orderBy('month', 'ASC');
+        return $q->orderBy('date', 'ASC');
     }
 }

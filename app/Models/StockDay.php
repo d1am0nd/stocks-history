@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StockDay extends Model
 {
     protected $casts = [
-        'day' => 'date',
+        'date' => 'date',
         'open' => 'float',
         'high' => 'float',
         'low' => 'float',
@@ -19,7 +19,7 @@ class StockDay extends Model
     ];
 
     protected $fillable = [
-        'day',
+        'date',
         'open',
         'high',
         'low',
@@ -41,11 +41,11 @@ class StockDay extends Model
 
     public function scopeByDay($q, $y, $m, $d)
     {
-        return $q->whereMonth('day', $m)->whereYear('day', $y)->whereDay('day', $d);
+        return $q->whereMonth('date', $m)->whereYear('date', $y)->whereDay('date', $d);
     }
 
     public function scopeOrder($q)
     {
-        return $q->orderBy('day', 'ASC');
+        return $q->orderBy('date', 'ASC');
     }
 }

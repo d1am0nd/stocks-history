@@ -12,10 +12,10 @@ import {
 @radium()
 class Tooltip extends React.Component {
   prettyDate() {
-    if (!this.props.data.month) {
+    if (!this.props.data.date) {
       return '';
     }
-    return this.props.data.month.substring(0, 10);
+    return this.props.data.date.substring(0, 10);
   }
   render() {
     return (

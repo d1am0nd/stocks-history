@@ -48,7 +48,7 @@ class Database {
             }
             $dbm = new $this->monthModel;
             $dbm->fill($data);
-            $dbm->month = $date->format('Y-m-d');
+            $dbm->date = $date->format('Y-m-d');
             $dbm->stock_id = $db->id;
             $dbm->save();
         }
@@ -73,7 +73,7 @@ class Database {
             }
             $dbm = new $this->dayModel;
             $dbm->fill($data);
-            $dbm->day = $date->format('Y-m-d');
+            $dbm->date = $date->format('Y-m-d');
             $dbm->stock_id = $db->id;
             $dbm->save();
         }

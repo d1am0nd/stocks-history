@@ -17,7 +17,7 @@ class CreateStockMonthliesTable extends Migration
             $table->increments('id');
             $table->integer('stock_id')->unsigned();
 
-            $table->date('month');
+            $table->date('date');
             $table->string('open');
             $table->string('high');
             $table->string('low');

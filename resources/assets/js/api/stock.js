@@ -7,3 +7,6 @@ export const fetchStocks = function() {
 export const fetchMonths = function(stock) {
   return axios.get(`${BASE_URL}/${stock}/months`);
 };
+export const fetchDays = function(stock) {
+  return axios.get(`${BASE_URL}/${stock}/days`);
+};

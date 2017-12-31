@@ -13,6 +13,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
+      animate: false,
       stocks: [],
       data: [],
       selectedStock: {},
@@ -55,6 +56,7 @@ class Main extends React.Component {
         .then(res => {
           this.setState({
             data: res.data[key],
+            animate: true,
           });
           resolve(res);
         })
@@ -86,7 +88,10 @@ class Main extends React.Component {
   render() {
     return (
       <div style={wrapperStyle()}>
-        <Graph stock={this.state.selectedStock} data={this.state.data}/>
+        <Graph
+          animate={this.props.animate}
+          stock={this.state.selectedStock}
+          data={this.state.data}/>
         <select
           onChange={e => this.handleStockChange(e)}
           value={this.state.selectedStock.symbol}>

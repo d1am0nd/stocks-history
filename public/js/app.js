@@ -40849,6 +40849,7 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 
     _this.state = {
+      animate: false,
       stocks: [],
       data: [],
       selectedStock: {},
@@ -40893,7 +40894,8 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
         console.log('fetching', type);
         func(symbol).then(function (res) {
           _this2.setState({
-            data: res.data[key]
+            data: res.data[key],
+            animate: true
           });
           resolve(res);
         }).catch(function (err) {
@@ -40930,7 +40932,10 @@ var Main = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_class
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { style: Object(__WEBPACK_IMPORTED_MODULE_4__styles_layout__["a" /* wrapper */])() },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_graphs_Graph__["a" /* default */], { stock: this.state.selectedStock, data: this.state.data }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_graphs_Graph__["a" /* default */], {
+          animate: this.props.animate,
+          stock: this.state.selectedStock,
+          data: this.state.data }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'select',
           {
@@ -45681,11 +45686,13 @@ var Graph = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_clas
               },
               data: this.transformedData() },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_recharts__["b" /* Line */], {
+              isAnimationActive: this.props.animate,
               type: 'monotone',
               label: 'close',
               dataKey: 'close',
               stroke: __WEBPACK_IMPORTED_MODULE_2__styles_vars__["b" /* primaryColor */] }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_recharts__["b" /* Line */], {
+              isAnimationActive: this.props.animate,
               type: 'monotone',
               label: 'adjustedVolume',
               dataKey: 'adjustedVolume',
@@ -45696,7 +45703,9 @@ var Graph = (_dec = __WEBPACK_IMPORTED_MODULE_1_radium___default()(), _dec(_clas
               content: function content(i) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Tooltip_Simple__["a" /* default */], { data: extractData(i) });
               } }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_recharts__["e" /* XAxis */], { interval: 4, dataKey: 'prettyDate' }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_recharts__["e" /* XAxis */], {
+              interval: 'preserveStartEnd',
+              dataKey: 'prettyDate' }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_recharts__["f" /* YAxis */], null)
           )
         )

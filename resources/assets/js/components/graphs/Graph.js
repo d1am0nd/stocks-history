@@ -106,11 +106,13 @@ class Graph extends React.Component {
             onClick={(a, b, c) => this.handleLineClick(a, b, c)}
             data={this.transformedData()}>
             <Line
+              isAnimationActive={this.props.animate}
               type={`monotone`}
               label={`close`}
               dataKey={`close`}
               stroke={primaryColor} />
             <Line
+              isAnimationActive={this.props.animate}
               type={`monotone`}
               label={`adjustedVolume`}
               dataKey={`adjustedVolume`}
@@ -123,7 +125,9 @@ class Graph extends React.Component {
                   <CustomTooltip data={extractData(i)}/>
                 );
               }}/>
-            <XAxis interval={4} dataKey={`prettyDate`}/>
+            <XAxis
+              interval={`preserveStartEnd`}
+              dataKey={`prettyDate`}/>
             <YAxis />
           </LineChart>
         </div>

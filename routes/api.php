@@ -20,9 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
     'prefix' => 'v1',
 ], function() {
+
     Route::group([
-        'prefix' => 'stock/{stock}'
+        'prefix' => 'stocks'
     ], function() {
-        Route::get('months', 'StocksController@months');
+        Route::get('/', 'StocksController@stocks');
+        Route::get('{stock}/days', 'StocksController@days');
+        Route::get('{stock}/months', 'StocksController@months');
     });
 });

@@ -11,5 +11,21 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix
+  .setPublicPath('./')
+  .webpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.(jsx|js|vue)$/,
+          loader: 'eslint-loader',
+          enforce: 'pre',
+          exclude: /(node_modules|bower_components)/,
+          options: {
+              formatter: require('eslint-friendly-formatter')
+          }
+        }
+      ]
+    }
+  })
+  .react('resources/assets/js/app.js', 'public/js');

@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Lib\AlphaVantage\Database;
 
-class FetchMonthlyPrices extends Command
+class FetchDailyPrices extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'fetch:months {symbol} {name}';
+    protected $signature = 'fetch:days {symbol} {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Fetches monthly prices';
+    protected $description = 'Fetches daily prices';
 
     protected $database;
 
@@ -43,7 +43,7 @@ class FetchMonthlyPrices extends Command
     {
         $symbol = $this->argument('symbol');
         $name = $this->argument('name');
-        $this->database->updateMonthly($symbol, $name);
+        $this->database->updateDaily($symbol, $name);
         $this->info('done');
     }
 }

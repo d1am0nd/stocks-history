@@ -16,6 +16,25 @@ class StocksController extends Controller
         $this->stock = $stock;
     }
 
+    public function stocks()
+    {
+        return response()
+            ->json(
+                $this->stock->get()
+            );
+    }
+
+    public function days($symbol)
+    {
+        $stock = $this
+            ->stock
+            ->bySymbol($symbol)
+            ->with('days')
+            ->firstOrFail();
+
+        return response()->json($stock);
+    }
+
     public function months($symbol)
     {
         $stock = $this

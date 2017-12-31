@@ -36,6 +36,28 @@ class Api {
         });
     }
 
+    public function getDaily($symbol)
+    {
+        return collect($this->query($symbol, [
+            'function' => 'TIME_SERIES_DAILY_ADJUSTED',
+            'outputsize' => 'full',
+        ])
+        ->{'Time Series (Daily)'})
+        ->map(function ($data, $date) {
+            return [
+                'date' => $date,
+                'open' => $data->{'1. open'},
+                'high' => $data->{'2. high'},
+                'low' => $data->{'3. low'},
+                'close' => $data->{'4. close'},
+                'adjusted_close' => $data->{'5. adjusted close'},
+                'volume' => $data->{'6. volume'},
+                'dividend_amount' => $data->{'7. dividend amount'},
+                'split_coefficient' => $data->{'8. split coefficient'},
+            ];
+        });
+    }
+
     private function query($symbol, $params = [])
     {
         return json_decode((string)$this->client->request('GET', null, [

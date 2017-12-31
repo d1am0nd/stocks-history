@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $api = app()->make(\App\Lib\AlphaVantage\Database::class);
-    return ($api->updateMonthly('SQ'));
-});
+Route::get('{any}', function () {
+    return view('react');
+})->where('any', '(.*)');

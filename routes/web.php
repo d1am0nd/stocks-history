@@ -11,5 +11,7 @@
 |
 */
 Route::get('{any}', function () {
+    $a = app()->make(\AV\Api\Stock::class);
+    dd($a->timeSeriesMonthlyAdjusted('MSFT'));
     return view('react');
 })->where('any', '(.*)');

@@ -51,7 +51,7 @@ class Stock extends Master {
      * @param  array  $params Additional API parameters
      * @return Object         Decoded API object
      */
-    public function timeSeriesIntraday($symbol, $params = [])
+    public function intraday($symbol, $params = [])
     {
         return $this->query(self::TIME_SERIES_INTRADAY, array_merge($params, [
             'symbol' => $symbol,
@@ -64,7 +64,7 @@ class Stock extends Master {
      * @param  array  $params Additional API parameters
      * @return Object         Decoded API object
      */
-    public function timeSeriesDaily($symbol, $params = [])
+    public function daily($symbol, $params = [])
     {
         return $this->query(self::TIME_SERIES_DAILY, array_merge($params, [
             'symbol' => $symbol,
@@ -77,35 +77,9 @@ class Stock extends Master {
      * @param  array  $params Additional API parameters
      * @return Object         Decoded API object
      */
-    public function timeSeriesDailyAdjusted($symbol, $params = [])
+    public function dailyAdjusted($symbol, $params = [])
     {
         return $this->query(self::TIME_SERIES_DAILY_ADJUSTED, array_merge($params, [
-            'symbol' => $symbol,
-        ]));
-    }
-
-    /**
-     * TIME_SERIES_MONTHLY
-     * @param  string $symbol Single stock symbol
-     * @param  array  $params Additional API parameters
-     * @return Object         Decoded API object
-     */
-    public function timeSeriesWeekly($symbol, $params = [])
-    {
-        return $this->query(self::TIME_SERIES_MONTHLY, array_merge($params, [
-            'symbol' => $symbol,
-        ]));
-    }
-
-    /**
-     * TIME_SERIES_MONTHLY_ADJUSTED
-     * @param  string $symbol Single stock symbol
-     * @param  array  $params Additional API parameters
-     * @return Object         Decoded API object
-     */
-    public function timeSeriesWeeklyAdjusted($symbol, $params = [])
-    {
-        return $this->query(self::TIME_SERIES_MONTHLY_ADJUSTED, array_merge($params, [
             'symbol' => $symbol,
         ]));
     }
@@ -116,7 +90,7 @@ class Stock extends Master {
      * @param  array  $params Additional API parameters
      * @return Object         Decoded API object
      */
-    public function timeSeriesMonthly($symbol, $params = [])
+    public function weekly($symbol, $params = [])
     {
         return $this->query(self::TIME_SERIES_WEEKLY, array_merge($params, [
             'symbol' => $symbol,
@@ -129,9 +103,35 @@ class Stock extends Master {
      * @param  array  $params Additional API parameters
      * @return Object         Decoded API object
      */
-    public function timeSeriesMonthlyAdjusted($symbol, $params = [])
+    public function weeklyAdjusted($symbol, $params = [])
     {
         return $this->query(self::TIME_SERIES_WEEKLY_ADJUSTED, array_merge($params, [
+            'symbol' => $symbol,
+        ]));
+    }
+
+    /**
+     * TIME_SERIES_MONTHLY
+     * @param  string $symbol Single stock symbol
+     * @param  array  $params Additional API parameters
+     * @return Object         Decoded API object
+     */
+    public function monthly($symbol, $params = [])
+    {
+        return $this->query(self::TIME_SERIES_MONTHLY, array_merge($params, [
+            'symbol' => $symbol,
+        ]));
+    }
+
+    /**
+     * TIME_SERIES_MONTHLY_ADJUSTED
+     * @param  string $symbol Single stock symbol
+     * @param  array  $params Additional API parameters
+     * @return Object         Decoded API object
+     */
+    public function monthlyAdjusted($symbol, $params = [])
+    {
+        return $this->query(self::TIME_SERIES_MONTHLY_ADJUSTED, array_merge($params, [
             'symbol' => $symbol,
         ]));
     }

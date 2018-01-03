@@ -10,7 +10,7 @@ class Currency extends Master {
 
     /* Available AlphaVantage currency functions */
 
-    // https://www.alphavantage.co/documentation/#intraday
+    // https://www.alphavantage.co/documentation/#currency-exchange
     const CURRENCY_EXCHANGE_RATE = 'CURRENCY_EXCHANGE_RATE';
 
     private $availableFunctions = [

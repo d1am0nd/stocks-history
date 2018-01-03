@@ -2,13 +2,11 @@
 
 namespace AV\Api;
 
+use AV\API\Master;
 use GuzzleHttp\Client;
 use AV\Exception\BadMethodCallException;
 
-class Stock {
-
-    // Guzzle
-    protected $client;
+class Stock extends Master {
 
     /* Available AlphaVantage stock functions */
 
@@ -46,13 +44,6 @@ class Stock {
         self::TIME_SERIES_MONTHLY_ADJUSTED,
         self::BATCH_STOCK_QUOTES,
     ];
-
-    public function __construct(Client $client)
-    {
-        $this->client = new $client([
-            'base_uri' => 'https://www.alphavantage.co/query',
-        ]);
-    }
 
     /**
      * TIME_SERIES_INTRADAY
@@ -159,31 +150,11 @@ class Stock {
     }
 
     /**
-     * Queries AlphaVantage API
-     * @param  string $func   Exact name of the AlphaVantage API function
-     * @param  array  $params Additional API params
-     * @return Object         Decoded API object
-     */
-    public function query($func, $params = [])
-    {
-        if (!$this->funcAvailable($func)) {
-            throw new BadMethodCallException($func);
-        }
-        return json_decode((string)$this->client->request('GET', null, [
-            'query' => array_merge([
-                'function' => $func,
-                'apikey' => env('AV_KEY'),
-            ], $params),
-        ])->getBody());
-    }
-
-
-    /**
      * Checks if the provided function name is available
      * @param  string $name Name of the AV function to execute
      * @return boolean
      */
-    private function funcAvailable($name)
+    protected function funcAvailable($name)
     {
         return in_array($name, $this->availableFunctions);
     }

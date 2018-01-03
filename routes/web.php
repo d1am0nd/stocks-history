@@ -11,7 +11,7 @@
 |
 */
 Route::get('{any}', function () {
-    $a = app()->make(\AV\Api\Stock::class);
-    dd($a->timeSeriesMonthlyAdjusted('MSFT'));
+    $a = app()->make(\AV\Api\Currency::class);
+    dd($a->currencyExchangeRate('USD', 'EUR'));
     return view('react');
 })->where('any', '(.*)');

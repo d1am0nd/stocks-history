@@ -23,7 +23,7 @@ abstract class Master {
     }
 
     /**
-     * Queries AlphaVantage API for type JSON and decodes response to an array
+     * Queries AlphaVantage   API for type JSON and decodes response to an array
      * @param  string $func   Exact name of the AlphaVantage API function
      * @param  array  $params Additional API params
      * @return Object         Decoded API object

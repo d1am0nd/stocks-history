@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use AV\Api\Stock;
 use AV\Api\Sector;
+use AV\Api\General;
 use AV\Api\Currency;
 use AV\Api\DigitalCurrency;
 use AV\Mocks\MasterApi as MasterMock;
@@ -24,6 +25,8 @@ class ApiParent extends TestCase
 
     protected $stock;
 
+    protected $general;
+
     protected function setUp()
     {
         $this->currency = $this->make(Currency::class);
@@ -31,6 +34,7 @@ class ApiParent extends TestCase
         $this->master = $this->make(MasterMock::class);
         $this->sector = $this->make(Sector::class);
         $this->stock = $this->make(Stock::class);
+        $this->general = $this->make(General::class);
     }
 
     protected function paramEquals($res, $param, $equals)

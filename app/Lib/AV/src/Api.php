@@ -4,6 +4,7 @@ namespace Av;
 
 use AV\Api\Stock;
 use AV\Api\Sector;
+use AV\Api\General;
 use AV\Api\Currency;
 use AV\Api\DigitalCurrency;
 use AV\Guzzle\Client;
@@ -29,6 +30,11 @@ class Api
     public static function stock()
     {
         return self::make(Stock::class);
+    }
+
+    public static function general()
+    {
+        return self::make(General::class);
     }
 
     private static function make($api)

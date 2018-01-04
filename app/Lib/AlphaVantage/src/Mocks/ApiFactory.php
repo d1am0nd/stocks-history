@@ -2,11 +2,11 @@
 
 namespace Av\Mocks;
 
-use AV\Api\Stock;
-use AV\Api\Sector;
-use AV\Api\Currency;
-use AV\Api\DigitalCurrency;
-use AV\Mocks\Client;
+use AlphaVantage\Api\Stock;
+use AlphaVantage\Api\Sector;
+use AlphaVantage\Api\Currency;
+use AlphaVantage\Api\DigitalCurrency;
+use AlphaVantage\Mocks\Client;
 use PHPUnit\Framework\TestCase;
 
 class ApiFactory

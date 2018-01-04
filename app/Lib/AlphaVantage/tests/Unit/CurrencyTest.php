@@ -9,10 +9,10 @@ class CurrencyTest extends ApiParent
     public function testCurrencyExchangeRate()
     {
         $exp = [
-            'from' => 'USD',
-            'to' => 'EUR',
+            'from_currency' => 'USD',
+            'to_currency' => 'EUR',
         ];
-        $res = $this->digitalCurrency->currencyExchangeRate($exp['from'], $exp['to']);
+        $res = $this->currency->currencyExchangeRate($exp['from_currency'], $exp['to_currency']);
         // Assert correct function
         $this->paramEquals($res, 'function', 'CURRENCY_EXCHANGE_RATE');
         // Assert correct parameters

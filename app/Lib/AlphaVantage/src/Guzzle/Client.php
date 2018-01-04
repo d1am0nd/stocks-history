@@ -1,9 +1,9 @@
 <?php
 
-namespace AV\Guzzle;
+namespace AlphaVantage\Guzzle;
 
 use GuzzleHttp\Client as GuzzleClient;
-use AV\Contracts\ClientInterface;
+use AlphaVantage\Contracts\ClientInterface;
 
 class Client extends GuzzleClient implements ClientInterface {
 

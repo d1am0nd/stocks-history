@@ -1,6 +1,6 @@
 <?php
 
-namespace AV\Mocks;
+namespace AlphaVantage\Mocks;
 
 class Response {
 

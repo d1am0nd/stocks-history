@@ -1,8 +1,8 @@
 <?php
 
-namespace AV\Api;
+namespace AlphaVantage\Api;
 
-use AV\API\Master;
+use AlphaVantage\API\Master;
 
 class General extends Master {
     /**

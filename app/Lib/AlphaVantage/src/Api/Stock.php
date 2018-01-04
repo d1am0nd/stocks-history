@@ -1,10 +1,10 @@
 <?php
 
-namespace AV\Api;
+namespace AlphaVantage\Api;
 
-use AV\API\Master;
+use AlphaVantage\API\Master;
 use GuzzleHttp\Client;
-use AV\Exception\BadMethodCallException;
+use AlphaVantage\Exception\BadMethodCallException;
 
 class Stock extends Master {
 

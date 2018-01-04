@@ -1,10 +1,10 @@
 <?php
 
-namespace AV\Api;
+namespace AlphaVantage\Api;
 
-use AV\Contracts\ClientInterface;
-use AV\Exception\BadDataTypeException;
-use AV\Exception\BadMethodCallException;
+use AlphaVantage\Contracts\ClientInterface;
+use AlphaVantage\Exception\BadDataTypeException;
+use AlphaVantage\Exception\BadMethodCallException;
 
 abstract class Master {
 

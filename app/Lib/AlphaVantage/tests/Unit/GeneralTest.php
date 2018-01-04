@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\Unit\ParentTest;
-use AV\Exception\BadDataTypeException;
+use AlphaVantage\Exception\BadDataTypeException;
 
 class GeneralTest extends ApiParent
 {

@@ -24,7 +24,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "AV\\": "app/Lib/AV/src"
+            "AlphaVantage\\": "app/Lib/AlphaVantage/src"
         }
     },
     "extra": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace AV\Exception;
+namespace AlphaVantage\Exception;
 
 /**
  * Class BadDataTypeException

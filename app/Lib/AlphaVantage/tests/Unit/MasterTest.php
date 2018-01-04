@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\Unit\ParentTest;
-use AV\Exception\BadDataTypeException;
-use AV\Exception\BadMethodCallException;
+use AlphaVantage\Exception\BadDataTypeException;
+use AlphaVantage\Exception\BadMethodCallException;
 
 class MasterTest extends ApiParent
 {

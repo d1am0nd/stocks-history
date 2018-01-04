@@ -1,13 +1,13 @@
 <?php
 
-namespace Av;
+namespace AlphaVantage;
 
-use AV\Api\Stock;
-use AV\Api\Sector;
-use AV\Api\General;
-use AV\Api\Currency;
-use AV\Api\DigitalCurrency;
-use AV\Guzzle\Client;
+use AlphaVantage\Api\Stock;
+use AlphaVantage\Api\Sector;
+use AlphaVantage\Api\General;
+use AlphaVantage\Api\Currency;
+use AlphaVantage\Api\DigitalCurrency;
+use AlphaVantage\Guzzle\Client;
 use PHPUnit\Framework\TestCase;
 
 class Api

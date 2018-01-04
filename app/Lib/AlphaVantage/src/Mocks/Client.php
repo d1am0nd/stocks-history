@@ -1,9 +1,9 @@
 <?php
 
-namespace AV\Mocks;
+namespace AlphaVantage\Mocks;
 
-use AV\Mocks\Response;
-use AV\Contracts\ClientInterface;
+use AlphaVantage\Mocks\Response;
+use AlphaVantage\Contracts\ClientInterface;
 
 class Client implements ClientInterface {
 

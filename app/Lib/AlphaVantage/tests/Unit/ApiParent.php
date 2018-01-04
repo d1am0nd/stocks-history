@@ -2,14 +2,14 @@
 
 namespace Tests\Unit;
 
-use AV\Api\Stock;
-use AV\Api\Sector;
-use AV\Api\General;
-use AV\Api\Currency;
-use AV\Api\DigitalCurrency;
-use AV\Mocks\MasterApi as MasterMock;
-use AV\Mocks\Client;
-use AV\Mocks\ApiFactory;
+use AlphaVantage\Api\Stock;
+use AlphaVantage\Api\Sector;
+use AlphaVantage\Api\General;
+use AlphaVantage\Api\Currency;
+use AlphaVantage\Api\DigitalCurrency;
+use AlphaVantage\Mocks\MasterApi as MasterMock;
+use AlphaVantage\Mocks\Client;
+use AlphaVantage\Mocks\ApiFactory;
 use PHPUnit\Framework\TestCase;
 
 class ApiParent extends TestCase

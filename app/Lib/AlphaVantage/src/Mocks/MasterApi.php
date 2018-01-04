@@ -1,8 +1,8 @@
 <?php
 
-namespace AV\Mocks;
+namespace AlphaVantage\Mocks;
 
-use AV\Api\Master;
+use AlphaVantage\Api\Master;
 
 class MasterApi extends Master {
 

@@ -1,6 +1,7 @@
 {
+    "name": "d1am0nd/alpha-vantage",
     "type": "library",
-    "description": "Alpha Vantage API client",
+    "description": "Simplified Alpha Vantage API client",
     "license": "MIT",
     "keywords": [
         "api",

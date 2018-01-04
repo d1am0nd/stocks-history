@@ -2,7 +2,7 @@
 
 namespace AV\Api;
 
-use GuzzleHttp\Client;
+use AV\Contracts\ClientInterface;
 use AV\Exception\BadDataTypeException;
 use AV\Exception\BadMethodCallException;
 
@@ -11,13 +11,15 @@ abstract class Master {
     // Guzzle
     protected $client;
 
+    // Api key
+    protected $apiKey;
+
     abstract protected function funcAvailable($funcName);
 
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client, $apiKey)
     {
-        $this->client = new $client([
-            'base_uri' => 'https://www.alphavantage.co/query',
-        ]);
+        $this->client = $client;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -37,7 +39,7 @@ abstract class Master {
         return json_decode((string)$this->client->request('GET', null, [
             'query' => array_merge([
                 'function' => $func,
-                'apikey' => env('AV_KEY'),
+                'apikey' => $this->apiKey,
             ], $params),
         ])->getBody(), true);
     }

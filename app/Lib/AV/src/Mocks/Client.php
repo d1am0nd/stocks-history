@@ -3,8 +3,9 @@
 namespace AV\Mocks;
 
 use AV\Mocks\Response;
+use AV\Contracts\ClientInterface;
 
-class Client {
+class Client implements ClientInterface {
 
     // Config
     private $config;
@@ -18,7 +19,7 @@ class Client {
         $this->payload = $payload;
     }
 
-    public function request($method, $nothing, $params)
+    public function request($method, $nothing = '', array $params = [])
     {
         $res = new Response($params);
         $this->payload['response'] = $res->getBody(false);

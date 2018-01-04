@@ -6,7 +6,7 @@ use AV\API\Master;
 use GuzzleHttp\Client;
 use AV\Exception\BadMethodCallException;
 
-class Currency extends Master {
+class DigitalCurrency extends Master {
 
     /* Available AlphaVantage currency functions */
 

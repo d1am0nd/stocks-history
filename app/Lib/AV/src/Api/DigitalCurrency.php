@@ -21,6 +21,9 @@ class DigitalCurrency extends Master {
 
     private $availableFunctions = [
         self::DIGITAL_CURRENCY_INTRADAY,
+        self::DIGITAL_CURRENCY_DAILY,
+        self::DIGITAL_CURRENCY_WEEKLY,
+        self::DIGITAL_CURRENCY_MONTHLY,
     ];
 
     /**
@@ -33,8 +36,8 @@ class DigitalCurrency extends Master {
     public function intraday($symbol, $market, $params = [])
     {
         return $this->query(self::DIGITAL_CURRENCY_INTRADAY, array_merge($params, [
-            'symbol' => $from,
-            'market' => $to,
+            'symbol' => $symbol,
+            'market' => $market,
         ]));
     }
 
@@ -48,8 +51,8 @@ class DigitalCurrency extends Master {
     public function daily($symbol, $market, $params = [])
     {
         return $this->query(self::DIGITAL_CURRENCY_DAILY, array_merge($params, [
-            'symbol' => $from,
-            'market' => $to,
+            'symbol' => $symbol,
+            'market' => $market,
         ]));
     }
 
@@ -63,8 +66,8 @@ class DigitalCurrency extends Master {
     public function weekly($symbol, $market, $params = [])
     {
         return $this->query(self::DIGITAL_CURRENCY_WEEKLY, array_merge($params, [
-            'symbol' => $from,
-            'market' => $to,
+            'symbol' => $symbol,
+            'market' => $market,
         ]));
     }
 
@@ -78,8 +81,8 @@ class DigitalCurrency extends Master {
     public function monthly($symbol, $market, $params = [])
     {
         return $this->query(self::DIGITAL_CURRENCY_MONTHLY, array_merge($params, [
-            'symbol' => $from,
-            'market' => $to,
+            'symbol' => $symbol,
+            'market' => $market,
         ]));
     }
 

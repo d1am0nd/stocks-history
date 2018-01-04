@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use Tests\Unit\ParentTest;
-use PHPUnit\Framework\TestCase;
 use AV\Exception\BadDataTypeException;
 use AV\Exception\BadMethodCallException;
 

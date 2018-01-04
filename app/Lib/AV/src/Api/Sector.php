@@ -22,7 +22,7 @@ class Sector extends Master {
      * @param  string $params   Additional params
      * @return Response object
      */
-    public function sector($params = [])
+    public function sectors($params = [])
     {
         return $this->query(self::SECTOR, $params);
     }

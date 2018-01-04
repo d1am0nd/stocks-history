@@ -6,11 +6,6 @@ use Tests\Unit\ParentTest;
 
 class DigitalCurrencyTest extends ApiParent
 {
-    public function testRequest()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testIntraday()
     {
         $this->funcTest('intraday', 'DIGITAL_CURRENCY_INTRADAY');

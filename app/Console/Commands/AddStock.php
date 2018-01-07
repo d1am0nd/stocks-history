@@ -4,25 +4,22 @@ namespace App\Console\Commands;
 
 use App\Models\Stock;
 use Illuminate\Console\Command;
-use App\Lib\AlphaVantage\Database;
 
-class FetchMonthlyPrices extends Command
+class AddStock extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'fetch:months {symbol}';
+    protected $signature = 'add:stock {symbol} {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Fetches monthly prices';
-
-    protected $database;
+    protected $description = 'add:stock {symbol} {name}';
 
     protected $stock;
 
@@ -31,10 +28,9 @@ class FetchMonthlyPrices extends Command
      *
      * @return void
      */
-    public function __construct(Database $database, Stock $stock)
+    public function __construct(Stock $stock)
     {
         parent::__construct();
-        $this->database = $database;
         $this->stock = $stock;
     }
 
@@ -46,14 +42,16 @@ class FetchMonthlyPrices extends Command
     public function handle()
     {
         $symbol = $this->argument('symbol');
+        $name = $this->argument('name');
+
         $stock = $this->stock->bySymbol($symbol)->first();
         if ($stock === null) {
-            $this->info("No stock $symbol found");
-            return;
+            $stock = new Stock;
+            $stock->symbol = $symbol;
         }
-
-        $this->database->updateMonthly($stock);
-
-        $this->info('done');
+        $stock->name = $name;
+        $stock->save();
+        $this->info($stock);
+        $this->info('Done');
     }
 }

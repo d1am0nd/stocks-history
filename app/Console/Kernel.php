@@ -13,8 +13,12 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\AddStock::class,
+        Commands\RemoveStock::class,
         Commands\FetchDailyPrices::class,
         Commands\FetchMonthlyPrices::class,
+        Commands\UpdateStockDaily::class,
+        Commands\UpdateStockMonthly::class,
     ];
 
     /**
@@ -25,8 +29,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command(Commands\UpdateStockMonthly::class)
+                  ->everyMinute();
+        $schedule->command(Commands\UpdateStockDaily::class)
+                  ->everyMinute();
     }
 
     /**

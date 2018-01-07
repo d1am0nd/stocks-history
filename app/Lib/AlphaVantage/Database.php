@@ -30,15 +30,20 @@ class Database {
         $this->dayModel = $dayModel;
     }
 
-    public function updateMonthly($symbol, $name)
+    public function updateMonthly(Stock $stock)
     {
-        $db = $this->existingOrNewStock($symbol, $name);
+        $last = $this->monthModel
+            ->where('stock_id', $stock->id)
+            ->orderBy('date', 'DESC')
+            ->first();
 
-        $r = $this->api->getMonthly($symbol);
-
+        $r = $this->api->getMonthly($stock->symbol);
         foreach ($r as $month => $data) {
             $date = Carbon::parse($month);
-            $dbm = $db
+            if ($last !== null && $date <= $last->date) {
+                continue;
+            }
+            $dbm = $stock
                 ->months()
                 ->byMonth($date->year, $date->month)
                 ->first();
@@ -49,21 +54,27 @@ class Database {
             $dbm = new $this->monthModel;
             $dbm->fill($data);
             $dbm->date = $date->format('Y-m-d');
-            $dbm->stock_id = $db->id;
+            $dbm->stock_id = $stock->id;
             $dbm->save();
         }
 
         return $r;
     }
 
-    public function updateDaily($symbol, $name)
+    public function updateDaily(Stock $stock)
     {
-        $db = $this->existingOrNewStock($symbol, $name);
+        $last = $this->dayModel
+            ->where('stock_id', $stock->id)
+            ->orderBy('date', 'DESC')
+            ->first();
 
-        $r = $this->api->getDaily($symbol);
+        $r = $this->api->getDaily($stock->symbol);
         foreach ($r as $day => $data) {
             $date = Carbon::parse($day);
-            $dbm = $db
+            if ($last !== null && $date <= $last->date) {
+                continue;
+            }
+            $dbm = $stock
                 ->days()
                 ->byDay($date->year, $date->month, $date->day)
                 ->first();
@@ -74,7 +85,7 @@ class Database {
             $dbm = new $this->dayModel;
             $dbm->fill($data);
             $dbm->date = $date->format('Y-m-d');
-            $dbm->stock_id = $db->id;
+            $dbm->stock_id = $stock->id;
             $dbm->save();
         }
 

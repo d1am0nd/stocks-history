@@ -15,12 +15,32 @@ class Stock extends Model
 
     public function months()
     {
-        return $this->hasMany(StockMonth::class)->order();
+        return $this->monthsClean()->order();
+    }
+
+    public function month()
+    {
+        return $this->hasOne(StockMonth::class);
+    }
+
+    public function monthsClean()
+    {
+        return $this->hasMany(StockMonth::class);
     }
 
     public function days()
     {
-        return $this->hasMany(StockDay::class)->order();
+        return $this->daysClean()->order();
+    }
+
+    public function day()
+    {
+        return $this->hasOne(StockDay::class);
+    }
+
+    public function daysClean()
+    {
+        return $this->hasMany(StockDay::class);
     }
 
     public function scopeBySymbol($q, $symbol)
